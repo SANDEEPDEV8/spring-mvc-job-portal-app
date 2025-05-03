@@ -114,15 +114,15 @@ public class JobPostActivityController {
                 List<RecruiterJobsDto> recruiterJobs = jobPostActivityService.getRecruiterJobs(((RecruiterProfile) currentUserProfile).getUserAccountId());
                 model.addAttribute("jobPost", recruiterJobs);
             }else{
-                List<JobSeekerApply> jobSeekerApplyList = jobSeekerApplyService.getCandidatesJobs((JobSeekerProfile) currentUserProfile);
-                List<JobSeekerSave> jobSeekerSaveList = jobSeekerSaveService.getCandidatesJob((JobSeekerProfile) currentUserProfile);
+                List<CandidateApply> jobSeekerApplyList = jobSeekerApplyService.getCandidatesJobs((CandidateProfile) currentUserProfile);
+                List<CandidateSave> jobSeekerSaveList = jobSeekerSaveService.getCandidatesJob((CandidateProfile) currentUserProfile);
                 boolean exist;
                 boolean saved;
 
                 for (JobPostActivity jobActivity : jobPost) {
                     exist = false;
                     saved = false;
-                    for (JobSeekerApply jobSeekerApply : jobSeekerApplyList) {
+                    for (CandidateApply jobSeekerApply : jobSeekerApplyList) {
                         if (Objects.equals(jobActivity.getJobPostId(), jobSeekerApply.getJob().getJobPostId())) {
                             jobActivity.setIsActive(true);
                             exist = true;
@@ -130,7 +130,7 @@ public class JobPostActivityController {
                         }
                     }
 
-                    for (JobSeekerSave jobSeekerSave : jobSeekerSaveList) {
+                    for (CandidateSave jobSeekerSave : jobSeekerSaveList) {
                         if (Objects.equals(jobActivity.getJobPostId(), jobSeekerSave.getJob().getJobPostId())) {
                             jobActivity.setIsSaved(true);
                             saved = true;

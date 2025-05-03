@@ -15,7 +15,7 @@ public interface JobPostActivityRepository extends JpaRepository<JobPostActivity
             " on j.job_location_id = l.id " +
             " INNER join job_company c  " +
             " on j.job_company_id = c.id " +
-            " left join job_seeker_apply s " +
+            " left join candidate_apply s " +
             " on s.job = j.job_post_id " +
             " where j.posted_by_id = :recruiter " +
             " GROUP By j.job_post_id" ,nativeQuery = true)

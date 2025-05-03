@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "job_seeker_profile")
-public class JobSeekerProfile {
+@Table(name = "candidate_profile")
+public class CandidateProfile {
 
     @Id
     private Integer userAccountId;
@@ -31,14 +31,14 @@ public class JobSeekerProfile {
     @OneToMany(targetEntity = Skills.class, cascade = CascadeType.ALL, mappedBy = "jobSeekerProfile")
     private List<Skills> skills;
 
-    public JobSeekerProfile() {
+    public CandidateProfile() {
     }
 
-    public JobSeekerProfile(Users userId) {
+    public CandidateProfile(Users userId) {
         this.userId = userId;
     }
 
-    public JobSeekerProfile(Integer userAccountId, Users userId, String firstName, String lastName, String city, String state, String country, String workAuthorization, String employmentType, String resume, String profilePhoto, List<Skills> skills) {
+    public CandidateProfile(Integer userAccountId, Users userId, String firstName, String lastName, String city, String state, String country, String workAuthorization, String employmentType, String resume, String profilePhoto, List<Skills> skills) {
         this.userAccountId = userAccountId;
         this.userId = userId;
         this.firstName = firstName;

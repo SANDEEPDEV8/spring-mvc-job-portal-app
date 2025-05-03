@@ -42,7 +42,7 @@ CREATE TABLE `job_location` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-CREATE TABLE `job_seeker_profile` (
+CREATE TABLE `candidate_profile` (
   `user_account_id` int NOT NULL,
   `city` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
@@ -93,19 +93,19 @@ CREATE TABLE `job_post_activity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-CREATE TABLE `job_seeker_save` (
+CREATE TABLE `candidate_save` (
   `id` int NOT NULL AUTO_INCREMENT,
   `job` int DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK1vn1w4dxfiavb5q2gu1n0whxo` (`user_id`,`job`),
   KEY `FKpb44x040gkdltxqy9m7jmvvf3` (`job`),
-  CONSTRAINT `FK96dyvgd8hmdohqsfdpvyl89mg` FOREIGN KEY (`user_id`) REFERENCES `job_seeker_profile` (`user_account_id`),
+  CONSTRAINT `FK96dyvgd8hmdohqsfdpvyl89mg` FOREIGN KEY (`user_id`) REFERENCES `candidate_profile` (`user_account_id`),
   CONSTRAINT `FKpb44x040gkdltxqy9m7jmvvf3` FOREIGN KEY (`job`) REFERENCES `job_post_activity` (`job_post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-CREATE TABLE `job_seeker_apply` (
+CREATE TABLE `candidate_apply` (
   `id` int NOT NULL AUTO_INCREMENT,
   `apply_date` datetime(6) DEFAULT NULL,
   `cover_letter` varchar(255) DEFAULT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE `job_seeker_apply` (
   UNIQUE KEY `UK8v6qok40anljlhpkc486nsdmu` (`user_id`,`job`),
   KEY `FKmfhx9q4uclbb74vm49lv9dmf4` (`job`),
   CONSTRAINT `FKmfhx9q4uclbb74vm49lv9dmf4` FOREIGN KEY (`job`) REFERENCES `job_post_activity` (`job_post_id`),
-  CONSTRAINT `FKs9fftlyxws2ak05q053vi57qv` FOREIGN KEY (`user_id`) REFERENCES `job_seeker_profile` (`user_account_id`)
+  CONSTRAINT `FKs9fftlyxws2ak05q053vi57qv` FOREIGN KEY (`user_id`) REFERENCES `candidate_profile` (`user_account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -126,6 +126,6 @@ CREATE TABLE `skills` (
   `years_of_experience` varchar(255) DEFAULT NULL,
   `job_seeker_profile` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKsjdksau8sat30c00aqh5xf2wh` (`job_seeker_profile`),
-  CONSTRAINT `FKsjdksau8sat30c00aqh5xf2wh` FOREIGN KEY (`job_seeker_profile`) REFERENCES `job_seeker_profile` (`user_account_id`)
+  KEY `FKsjdksau8sat30c00aqh5xf2wh` (`candidate_profile`),
+  CONSTRAINT `FKsjdksau8sat30c00aqh5xf2wh` FOREIGN KEY (`candidate_profile`) REFERENCES `candidate_profile` (`user_account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

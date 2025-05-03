@@ -1,8 +1,8 @@
 package com.skan.jobportal.services;
 
 import com.skan.jobportal.entity.JobPostActivity;
-import com.skan.jobportal.entity.JobSeekerProfile;
-import com.skan.jobportal.entity.JobSeekerSave;
+import com.skan.jobportal.entity.CandidateProfile;
+import com.skan.jobportal.entity.CandidateSave;
 import com.skan.jobportal.repository.JobSeekerSaveRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,19 +18,19 @@ public class JobSeekerSaveService {
         this.jobSeekerSaveRepository = jobSeekerSaveRepository;
     }
 
-    public List<JobSeekerSave> getCandidatesJob(JobSeekerProfile userAccountId) {
+    public List<CandidateSave> getCandidatesJob(CandidateProfile userAccountId) {
         return jobSeekerSaveRepository.findByUserId(userAccountId);
     }
 
-    public List<JobSeekerSave> getJobCandidates(JobPostActivity job) {
+    public List<CandidateSave> getJobCandidates(JobPostActivity job) {
         return jobSeekerSaveRepository.findByJob(job);
     }
 
-    public void addNew(JobSeekerSave jobSeekerSave) {
+    public void addNew(CandidateSave jobSeekerSave) {
         jobSeekerSaveRepository.save(jobSeekerSave);
     }
 
-    public Optional<JobSeekerSave> findById(Integer id) {
+    public Optional<CandidateSave> findById(Integer id) {
 
         return jobSeekerSaveRepository.findById(id);
     }

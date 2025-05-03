@@ -4,6 +4,7 @@ import com.skan.jobportal.entity.RecruiterProfile;
 import com.skan.jobportal.entity.Users;
 import com.skan.jobportal.repository.RecruiterProfileRepository;
 import com.skan.jobportal.repository.UsersRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;

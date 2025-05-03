@@ -1,6 +1,6 @@
 package com.skan.jobportal.services;
 
-import com.skan.jobportal.entity.JobSeekerProfile;
+import com.skan.jobportal.entity.CandidateProfile;
 import com.skan.jobportal.entity.Users;
 import com.skan.jobportal.repository.JobSeekerProfileRepository;
 import com.skan.jobportal.repository.UsersRepository;
@@ -22,20 +22,20 @@ public class JobSeekerProfileService {
         this.usersRepository = usersRepository;
     }
 
-    public Optional<JobSeekerProfile> getOne(Integer id) {
+    public Optional<CandidateProfile> getOne(Integer id) {
         return jobSeekerProfileRepository.findById(id);
     }
 
-    public JobSeekerProfile addNew(JobSeekerProfile jobSeekerProfile) {
+    public CandidateProfile addNew(CandidateProfile jobSeekerProfile) {
         return jobSeekerProfileRepository.save(jobSeekerProfile);
     }
 
-    public JobSeekerProfile getCurrentSeekerProfile() {
+    public CandidateProfile getCurrentSeekerProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
             Users users = usersRepository.findByEmail(currentUsername).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-            Optional<JobSeekerProfile> seekerProfile = getOne(users.getUserId());
+            Optional<CandidateProfile> seekerProfile = getOne(users.getUserId());
             return seekerProfile.orElse(null);
         } else return null;
 

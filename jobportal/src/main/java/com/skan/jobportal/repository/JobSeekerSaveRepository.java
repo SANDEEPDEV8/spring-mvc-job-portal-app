@@ -1,18 +1,18 @@
 package com.skan.jobportal.repository;
 
 import com.skan.jobportal.entity.JobPostActivity;
-import com.skan.jobportal.entity.JobSeekerProfile;
-import com.skan.jobportal.entity.JobSeekerSave;
+import com.skan.jobportal.entity.CandidateProfile;
+import com.skan.jobportal.entity.CandidateSave;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface JobSeekerSaveRepository extends JpaRepository<JobSeekerSave, Integer> {
+public interface JobSeekerSaveRepository extends JpaRepository<CandidateSave, Integer> {
 
-    public List<JobSeekerSave> findByUserId(JobSeekerProfile userAccountId);
+    public List<CandidateSave> findByUserId(CandidateProfile userAccountId);
 
-    List<JobSeekerSave> findByJob(JobPostActivity job);
+    List<CandidateSave> findByJob(JobPostActivity job);
 
 }

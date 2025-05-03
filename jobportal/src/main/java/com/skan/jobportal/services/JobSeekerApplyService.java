@@ -1,8 +1,8 @@
 package com.skan.jobportal.services;
 
 import com.skan.jobportal.entity.JobPostActivity;
-import com.skan.jobportal.entity.JobSeekerApply;
-import com.skan.jobportal.entity.JobSeekerProfile;
+import com.skan.jobportal.entity.CandidateApply;
+import com.skan.jobportal.entity.CandidateProfile;
 import com.skan.jobportal.repository.JobSeekerApplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,15 +19,15 @@ public class JobSeekerApplyService {
         this.jobSeekerApplyRepository = jobSeekerApplyRepository;
     }
 
-    public List<JobSeekerApply> getCandidatesJobs(JobSeekerProfile userAccountId) {
+    public List<CandidateApply> getCandidatesJobs(CandidateProfile userAccountId) {
         return jobSeekerApplyRepository.findByUserId(userAccountId);
     }
 
-    public List<JobSeekerApply> getJobCandidates(JobPostActivity job) {
+    public List<CandidateApply> getJobCandidates(JobPostActivity job) {
         return jobSeekerApplyRepository.findByJob(job);
     }
 
-    public void addNew(JobSeekerApply jobSeekerApply) {
+    public void addNew(CandidateApply jobSeekerApply) {
         jobSeekerApplyRepository.save(jobSeekerApply);
     }
 }

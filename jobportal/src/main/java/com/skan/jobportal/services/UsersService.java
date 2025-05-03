@@ -1,6 +1,6 @@
 package com.skan.jobportal.services;
 
-import com.skan.jobportal.entity.JobSeekerProfile;
+import com.skan.jobportal.entity.CandidateProfile;
 import com.skan.jobportal.entity.RecruiterProfile;
 import com.skan.jobportal.entity.Users;
 import com.skan.jobportal.repository.JobSeekerProfileRepository;
@@ -43,7 +43,7 @@ public class UsersService {
         if(userTypeId == 1)
             recruiterProfileRepository.save(new RecruiterProfile(savedUser));
         else
-            jobSeekerProfileRepository.save(new JobSeekerProfile(savedUser));
+            jobSeekerProfileRepository.save(new CandidateProfile(savedUser));
 
         return savedUser;
     }
@@ -62,7 +62,7 @@ public class UsersService {
                 RecruiterProfile recruiterProfile = recruiterProfileRepository.findById(userId).orElse(new RecruiterProfile());
                 return recruiterProfile;
             }else{
-                JobSeekerProfile jobSeekerProfile = jobSeekerProfileRepository.findById(userId).orElse(new JobSeekerProfile());
+                CandidateProfile jobSeekerProfile = jobSeekerProfileRepository.findById(userId).orElse(new CandidateProfile());
                 return jobSeekerProfile;
             }
         }

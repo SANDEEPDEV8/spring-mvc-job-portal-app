@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class RecruiterProfile {
 
     @Id
-    private int userAccountId;
+    private Integer userAccountId ;
 
     @OneToOne
     @JoinColumn(name = "user_account_id")

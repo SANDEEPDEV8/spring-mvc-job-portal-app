@@ -2,7 +2,7 @@ package com.skan.jobportal.controller;
 
 import com.skan.jobportal.Util.FileDownloadUtil;
 import com.skan.jobportal.Util.FileUploadUtil;
-import com.skan.jobportal.entity.JobSeekerProfile;
+import com.skan.jobportal.entity.CandidateProfile;
 import com.skan.jobportal.entity.Skills;
 import com.skan.jobportal.entity.Users;
 import com.skan.jobportal.repository.UsersRepository;
@@ -41,15 +41,15 @@ public class JobSeekerProfileController {
         this.jobSeekerProfileService = jobSeekerProfileService;
         this.usersRepository = usersRepository;
     }
-    @GetMapping("/")
+    @GetMapping("")
     public String jobSeekerProfile(Model model) {
-        JobSeekerProfile jobSeekerProfile = new JobSeekerProfile();
+        CandidateProfile jobSeekerProfile = new CandidateProfile();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<Skills> skills = new ArrayList<>();
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             Users user = usersRepository.findByEmail(authentication.getName()).orElseThrow(() -> new UsernameNotFoundException("User not found."));
-            Optional<JobSeekerProfile> seekerProfile = jobSeekerProfileService.getOne(user.getUserId());
+            Optional<CandidateProfile> seekerProfile = jobSeekerProfileService.getOne(user.getUserId());
             if (seekerProfile.isPresent()) {
                 jobSeekerProfile = seekerProfile.get();
                 if (jobSeekerProfile.getSkills().isEmpty()) {
@@ -66,7 +66,7 @@ public class JobSeekerProfileController {
     }
 
     @PostMapping("/addNew")
-    public String addNew(JobSeekerProfile jobSeekerProfile,
+    public String addNew(CandidateProfile jobSeekerProfile,
                          @RequestParam("image") MultipartFile image,
                          @RequestParam("pdf") MultipartFile pdf,
                          Model model) {
@@ -99,7 +99,7 @@ public class JobSeekerProfileController {
             jobSeekerProfile.setResume(resumeName);
         }
 
-        JobSeekerProfile seekerProfile = jobSeekerProfileService.addNew(jobSeekerProfile);
+        CandidateProfile seekerProfile = jobSeekerProfileService.addNew(jobSeekerProfile);
 
         try {
             String uploadDir = "photos/candidate/" + jobSeekerProfile.getUserAccountId();
@@ -120,7 +120,7 @@ public class JobSeekerProfileController {
     @GetMapping("/{id}")
     public String candidateProfile(@PathVariable("id") int id, Model model) {
 
-        Optional<JobSeekerProfile> seekerProfile = jobSeekerProfileService.getOne(id);
+        Optional<CandidateProfile> seekerProfile = jobSeekerProfileService.getOne(id);
         model.addAttribute("profile", seekerProfile.get());
         return "job-seeker-profile";
     }

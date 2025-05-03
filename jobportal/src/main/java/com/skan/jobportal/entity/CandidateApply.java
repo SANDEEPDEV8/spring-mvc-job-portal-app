@@ -7,10 +7,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(uniqueConstraints = {
+@Table(name="candidate_apply",uniqueConstraints = {
         @UniqueConstraint(columnNames = {"userId", "job"})
 })
-public class JobSeekerApply implements Serializable {
+public class CandidateApply implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class JobSeekerApply implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "user_account_id")
-    private JobSeekerProfile userId;
+    private CandidateProfile userId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "job", referencedColumnName = "jobPostId")
@@ -29,10 +29,10 @@ public class JobSeekerApply implements Serializable {
 
     private String coverLetter;
 
-    public JobSeekerApply() {
+    public CandidateApply() {
     }
 
-    public JobSeekerApply(Integer id, JobSeekerProfile userId, JobPostActivity job, Date applyDate, String coverLetter) {
+    public CandidateApply(Integer id, CandidateProfile userId, JobPostActivity job, Date applyDate, String coverLetter) {
         this.id = id;
         this.userId = userId;
         this.job = job;
@@ -48,11 +48,11 @@ public class JobSeekerApply implements Serializable {
         this.id = id;
     }
 
-    public JobSeekerProfile getUserId() {
+    public CandidateProfile getUserId() {
         return userId;
     }
 
-    public void setUserId(JobSeekerProfile userId) {
+    public void setUserId(CandidateProfile userId) {
         this.userId = userId;
     }
 

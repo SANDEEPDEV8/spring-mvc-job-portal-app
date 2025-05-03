@@ -33,7 +33,7 @@ public class RecruiterProfileController {
         this.recruiterProfileService = recruiterProfileService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String recruiterProfile(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -43,9 +43,9 @@ public class RecruiterProfileController {
             Users users = usersRepository.findByEmail(currentUsername).orElseThrow(() -> new UsernameNotFoundException("Could not " + "found user"));
             Optional<RecruiterProfile> recruiterProfile = recruiterProfileService.getOne(users.getUserId());
 
-            if (!recruiterProfile.isEmpty())
-                model.addAttribute("profile", recruiterProfile.get());
+            RecruiterProfile profile = recruiterProfile.orElse(new RecruiterProfile());
 
+            model.addAttribute("profile", profile);
         }
 
         return "recruiter_profile";
@@ -55,6 +55,7 @@ public class RecruiterProfileController {
     public String addNew(RecruiterProfile recruiterProfile, @RequestParam("image") MultipartFile multipartFile, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        //recruiterProfile = new RecruiterProfile();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
             Users users = usersRepository.findByEmail(currentUsername).orElseThrow(() -> new UsernameNotFoundException("Could not " + "found user"));
